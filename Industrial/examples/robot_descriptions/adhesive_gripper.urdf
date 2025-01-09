@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<robot name="gripper">
+  <link name="baseLink">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value="0.1"/>
+       <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0.0 0.0"/>
+      <geometry>
+			<mesh filename="tool_mesh/base_kim.stl" scale="0.0025 0.001 0.001"/>
+      </geometry>
+       <material name="grey">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="gripping_trafo" type="fixed">
+		<parent link="baseLink"/>
+		<child link="head"/>
+		<origin xyz="0.05 0.0 0.0" rpy="0 -1.57 0"/>
+  </joint>
+
+  <link name="head">
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+           <cylinder length="0.10" radius="0.005"/>
+        </geometry>
+        <material name="black">
+            <color rgba="0.1 0.1 0.1 1.0"/>
+        </material>
+    </visual>
+
+  </link>
+
+  <joint name="milling_trafo" type="fixed">
+		<parent link="head"/>
+		<child link="tcp"/>
+		<origin xyz="0 0 -0.05" rpy="0 0 0"/>
+	</joint> 
+
+  <link name="tcp">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="almost_black">
+          <color rgba="1 0 1 1"/>
+    </material>
+    <geometry>
+      <cylinder length="0.01" radius="0.002"/>
+    </geometry>
+  </visual>
+  </link>
+
+</robot>
